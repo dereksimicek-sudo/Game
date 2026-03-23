@@ -32,7 +32,7 @@ def draw():
     # Draw enemy base (right side)
     ctx.fillStyle = "red"
     ctx.fillRect(730, 150, 50, 50)
-
+    
 # -------------------------------
 # GAME STATE
 # -------------------------------
