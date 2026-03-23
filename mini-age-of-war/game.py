@@ -33,15 +33,6 @@ def draw():
     ctx.fillStyle = "red"
     ctx.fillRect(730, 150, 50, 50)
 
-# Import Brython browser tools
-from browser import document, timer
-
-# Get canvas element from HTML
-canvas = document["game"]
-
-# Get drawing context (used to draw shapes)
-ctx = canvas.getContext("2d")
-
 # -------------------------------
 # GAME STATE
 # -------------------------------
