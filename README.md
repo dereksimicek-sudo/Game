@@ -25,8 +25,8 @@ Instead of executing Python code through a standard interpreter, the script is e
 The main components of the game are:
 
 * **Canvas rendering system** – draws the game world
-* **Game loop (planned)** – updates the game continuously
-* **Units (planned)** – player and enemy soldiers
+* **Game loop** – updates the game continuously
+* **Units** – player and enemy soldiers
 * **Combat system (planned)** – units fight when they meet
 * **Base system** – each side has a base with health
 

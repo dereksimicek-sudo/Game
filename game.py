@@ -1,5 +1,5 @@
 # Import Brython browser tools
-from browser import document
+from browser import document, timer 
 
 # Get canvas element from HTML
 canvas = document["game"]
@@ -33,10 +33,6 @@ def draw():
     ctx.fillStyle = "red"
     ctx.fillRect(730, 150, 50, 50)
 
-
-# Call draw once (for now)
-draw()
-
 # Import Brython browser tools
 from browser import document, timer
 
@@ -53,6 +49,37 @@ ctx = canvas.getContext("2d")
 # This variable controls whether the game is running
 game_running = True
 
+# List to store all units
+units = []
+
+# -------------------------------
+# UNIT CLASS
+# -------------------------------
+class Unit:
+    """
+    Represents a single moving unit.
+    """
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.speed = 1  # movement speed
+
+    def move(self):
+        # Move to the right (toward enemy)
+        self.x += self.speed
+
+    def draw(self):
+        # Draw unit as small square
+        ctx.fillStyle = "black"
+        ctx.fillRect(self.x, self.y, 10, 10)
+
+# Spawn one unit (for testing)
+def spawn_unit():
+    unit = Unit(80, 190)
+    units.append(unit)
+
+spawn_unit()
 
 # -------------------------------
 # DRAW FUNCTION
@@ -80,6 +107,9 @@ def draw():
     ctx.fillStyle = "red"
     ctx.fillRect(730, 150, 50, 50)
 
+    # Draw all units
+    for unit in units:
+        unit.draw()
 
 # -------------------------------
 # GAME LOOP
@@ -92,7 +122,13 @@ def game_loop():
     It updates the game and redraws everything.
     """
 
+def game_loop():
     if game_running:
+
+        # Move all units
+        for unit in units:
+            unit.move()
+
         draw()
 
 
