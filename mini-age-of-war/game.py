@@ -42,6 +42,7 @@ game_running = True
 
 # List to store all units
 units = []
+enemy_units = []
 
 # -------------------------------
 # UNIT CLASS
@@ -51,14 +52,14 @@ class Unit:
     Represents a single moving unit.
     """
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, direction=1):
         self.x = x
         self.y = y
-        self.speed = 1  # movement speed
+        self.speed = 1
+        self.direction = direction  # 1 = right, -1 = left
 
     def move(self):
-        # Move to the right (toward enemy)
-        self.x += self.speed
+        self.x += self.speed * self.direction
 
     def draw(self):
         # Draw unit as small square
@@ -71,6 +72,10 @@ def spawn_unit():
     units.append(unit)
 
 spawn_unit()
+
+def spawn_enemy():
+    enemy = Unit(700, 190, direction=-1)
+    enemy_units.append(enemy)
 
 # -------------------------------
 # DRAW FUNCTION
@@ -102,6 +107,11 @@ def draw():
     for unit in units:
         unit.draw()
 
+    # Draw enemy units
+    for enemy in enemy_units:
+        ctx.fillStyle = "darkred"
+        ctx.fillRect(enemy.x, enemy.y, 10, 10)
+
 # -------------------------------
 # GAME LOOP
 # -------------------------------
@@ -122,9 +132,19 @@ def game_loop():
 
         draw()
 
+        # Move player units
+        for unit in units:
+            unit.move()
+
+        # Move enemy units
+        for enemy in enemy_units:
+            enemy.move()
 
 # Run the game loop every 16 ms (~60 FPS)
 timer.set_interval(game_loop, 16)
+
+# Enemy spawns every 2 seconds
+timer.set_interval(spawn_enemy, 2000)
 
 # -------------------------------
 # INPUT (MOUSE CLICK)
