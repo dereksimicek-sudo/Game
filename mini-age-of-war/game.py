@@ -125,3 +125,17 @@ def game_loop():
 
 # Run the game loop every 16 ms (~60 FPS)
 timer.set_interval(game_loop, 16)
+
+# -------------------------------
+# INPUT (MOUSE CLICK)
+# -------------------------------
+def on_click(event):
+    """
+    This function is called whenever the player clicks
+    on the canvas. It spawns a new unit.
+    """
+    spawn_unit()
+
+
+# Bind mouse click to function
+canvas.bind("click", on_click)
